@@ -43,38 +43,7 @@ export default function HomePageClient({ featuredProduct }: { featuredProduct: a
         </div>
       </section>
 
-      {/* Featured 3D Section */}
-      <section className="py-32 bg-black relative z-20 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-            <div>
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-4">Innovation Showcase</h2>
-              <p className="text-neutral-400 text-lg max-w-xl">
-                Interact with the {featuredProduct ? featuredProduct.title : 'Sony BoomBox XG500'} in a fully rendered 3D space. Drag, zoom, and inspect every detail.
-              </p>
-            </div>
-            <Link href={featuredProduct ? `/products/${featuredProduct.handle}` : '/collections/all'} className="hidden md:block">
-               <button className="px-6 py-3 border border-white/20 text-white rounded-full font-medium hover:bg-white hover:text-black transition-colors uppercase tracking-widest text-sm">
-                 View Specs →
-               </button>
-            </Link>
-          </div>
-          
-          {featuredProduct && featuredProduct.modelUrl ? (
-             <div className="h-[50vh] md:h-[80vh] w-full rounded-3xl overflow-hidden shadow-2xl relative bg-[#111111] cursor-grab active:cursor-grabbing border border-neutral-800">
-               <ProductViewer modelUrl={featuredProduct.modelUrl} autoRotate={true} />
-               <div className="absolute bottom-8 left-8 bg-black/80 backdrop-blur-md px-6 py-3 rounded-full text-sm font-semibold flex items-center gap-2 shadow-lg border border-neutral-800 text-white">
-                  Drag to rotate 360°
-               </div>
-             </div>
-          ) : (
-             <div className="h-[50vh] md:h-[80vh] w-full rounded-3xl flex flex-col items-center justify-center bg-[#111111] border border-neutral-800 border-dashed text-neutral-400">
-                <span className="text-5xl mb-4">🚀</span>
-                <p>Syncing 3D configurations from Shopify...</p>
-             </div>
-          )}
-        </div>
-      </section>
+
     </div>
   );
 }

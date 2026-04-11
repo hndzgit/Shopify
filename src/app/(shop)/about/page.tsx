@@ -46,7 +46,7 @@ export default function AboutPage() {
             className="w-full aspect-[21/9] bg-neutral-900 rounded-3xl overflow-hidden mb-12 relative border border-white/5 shadow-2xl"
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10" />
-            <div className="w-full h-full object-cover bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center" />
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000" alt="Tech" className="w-full h-full object-cover absolute inset-0 z-0" />
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
@@ -75,7 +75,7 @@ export default function AboutPage() {
             className="w-full aspect-[21/9] bg-neutral-900 rounded-3xl overflow-hidden mb-12 relative border border-white/5 shadow-2xl"
           >
              <div className="absolute inset-0 bg-blue-500/20 mix-blend-overlay z-10" />
-             <div className="w-full h-full object-cover bg-[url('https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center" />
+             <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&q=80&w=2000" alt="Innovation" className="w-full h-full object-cover absolute inset-0 z-0" />
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
