@@ -59,7 +59,7 @@ export default async function ProductDetailPage({
             <div className="mt-4">
               <h3 className="text-xl font-bold border-b border-white/10 pb-4 mb-4">Item Description</h3>
               <div 
-                className="prose prose-invert text-neutral-400 leading-relaxed max-w-none overflow-hidden [&_img]:max-w-full [&_table]:w-full" 
+                className="prose prose-invert text-neutral-400 leading-relaxed max-w-none overflow-hidden [&_img]:max-w-full [&_table]:w-full [&_p]:m-0 [&_img]:m-0 [&_img]:block [&_img]:mx-auto [&_br]:hidden" 
                 dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} 
               />
             </div>
