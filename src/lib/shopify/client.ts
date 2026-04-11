@@ -27,8 +27,12 @@ export const GET_PRODUCT_QUERY = `
           currencyCode
         }
       }
-      featuredImage {
-        url
+      images(first: 5) {
+        edges {
+          node {
+            url
+          }
+        }
       }
       variants(first: 10) {
         edges {
@@ -58,8 +62,12 @@ export const GET_PRODUCTS_QUERY = `
               currencyCode
             }
           }
-          featuredImage {
-            url
+          images(first: 1) {
+            edges {
+              node {
+                url
+              }
+            }
           }
         }
       }

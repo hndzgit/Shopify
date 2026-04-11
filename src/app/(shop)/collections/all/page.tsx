@@ -13,7 +13,7 @@ export default async function ShopCollections() {
       handle: edge.node.handle,
       title: edge.node.title,
       price: `$${edge.node.priceRangeV2?.minVariantPrice?.amount || '0'}`,
-      image: edge.node.featuredImage?.url || ''
+      image: edge.node.images?.edges[0]?.node?.url || ''
     }));
   } catch (error) {
     console.error("Shopify Products Fetch Error:", error);

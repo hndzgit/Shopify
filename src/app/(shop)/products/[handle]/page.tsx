@@ -30,37 +30,57 @@ export default async function ProductDetailPage({
     descriptionHtml: productData.descriptionHtml,
     price: productData.priceRangeV2.minVariantPrice.amount,
     currencyCode: productData.priceRangeV2.minVariantPrice.currencyCode,
-    image: productData.featuredImage?.url || '',
-    modelUrl: productData.metafield?.value || null,
+    images: productData.images?.edges.map((e: any) => e.node.url) || [],
     variants: productData.variants.edges.map((e: any) => e.node),
   };
 
+  const mainImage = product.images[0] || '';
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
-      <div className="lg:col-span-8 h-[50vh] md:h-[60vh] lg:h-[80vh] w-full rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] relative bg-[#0a0a0a] border border-white/5">
-        {product.modelUrl ? (
-          <Suspense fallback={<div className="flex h-full items-center justify-center text-neutral-500">Initializing 3D Engine...</div>}>
-            <ProductViewer modelUrl={product.modelUrl} autoRotate={true} />
-          </Suspense>
-        ) : (
-          <div className="flex w-full h-full items-center justify-center bg-[#111] flex-col gap-4 border border-dashed border-white/10 m-4 rounded-2xl">
-            <span className="text-4xl text-neutral-600">📦</span>
-            <p className="text-neutral-500 font-medium">No 3D Model attached to this product inside Shopify.</p>
+      <div className="lg:col-span-12 h-auto w-full relative bg-[#0a0a0a] border border-white/5 p-6 rounded-3xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* IMAGE GALLERY COLUMN */}
+          <div className="flex flex-col gap-4">
+            <div className="w-full aspect-square bg-[#111] rounded-2xl border border-white/10 overflow-hidden relative">
+              {mainImage ? (
+                <img src={mainImage} className="w-full h-full object-contain mix-blend-screen" alt={product.title} />
+              ) : (
+                <div className="flex w-full h-full items-center justify-center text-neutral-600 flex-col gap-2">
+                  <span className="text-4xl">📷</span>
+                  <p>No image available</p>
+                </div>
+              )}
+            </div>
+            {product.images.length > 1 && (
+              <div className="grid grid-cols-4 lg:grid-cols-5 gap-3">
+                {product.images.slice(1).map((imgUrl: string, idx: number) => (
+                   <div key={idx} className="aspect-square bg-[#111] rounded-xl border border-white/10 overflow-hidden">
+                     <img src={imgUrl} className="w-full h-full object-cover mix-blend-screen opacity-80 hover:opacity-100 transition-opacity" alt="thumbnail" />
+                   </div>
+                ))}
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      
-      <div className="lg:col-span-4 flex flex-col justify-center gap-6 pb-24 lg:pb-0">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-white">{product.title}</h1>
-        <p className="text-3xl font-bold text-blue-400">
-          {product.currencyCode} ${product.price}
-        </p>
-        <div 
-          className="prose prose-invert text-neutral-400 leading-relaxed max-w-none" 
-          dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} 
-        />
-        <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-[#050505]/90 backdrop-blur-md border-t border-white/10 lg:relative lg:bg-transparent lg:backdrop-blur-none lg:border-t lg:border-white/10 lg:p-0 lg:pt-8 w-full">
-            <AddToCartButton product={product} />
+
+          {/* PRODUCT INFO COLUMN */}
+          <div className="flex flex-col gap-6">
+            <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-white">{product.title}</h1>
+            <p className="text-3xl font-bold text-blue-400">
+              {product.currencyCode} ${product.price}
+            </p>
+            
+            {/* ADD TO CART ACTION */}
+            <div className="py-4 border-y border-white/10">
+              <AddToCartButton product={{ ...product, image: mainImage }} />
+            </div>
+
+            {/* LONG DESCRIPTION FROM SUPPLIER */}
+            <div 
+              className="prose prose-invert text-neutral-400 leading-relaxed max-w-none mt-4 overflow-hidden" 
+              dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} 
+            />
+          </div>
         </div>
       </div>
     </div>
