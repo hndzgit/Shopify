@@ -12,7 +12,7 @@ export default async function ShopCollections() {
       id: edge.node.id,
       handle: edge.node.handle,
       title: edge.node.title,
-      price: `$${edge.node.priceRange.minVariantPrice.amount}`,
+      price: `$${edge.node.priceRangeV2?.minVariantPrice?.amount || '0'}`,
       image: edge.node.featuredImage?.url || ''
     }));
   } catch (error) {

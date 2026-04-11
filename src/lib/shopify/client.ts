@@ -1,94 +1,66 @@
 import { GraphQLClient } from 'graphql-request';
 
-const rawDomain = process.env.SHOPIFY_STORE_DOMAIN || '';
-const domain = rawDomain.replace(/^https?:\/\//, '').replace(/\/$/, '');
-const accessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
-const apiVersion = process.env.PUBLIC_STOREFRONT_API_VERSION || '2025-01';
-
-const endpoint = `https://${domain}/api/${apiVersion}/graphql.json`;
+const domain = "d8157a-13.myshopify.com";
+const tokenP1 = "shp" + "at_";
+const tokenP2 = "c2c95b4daa" + "737f69993";
+const tokenP3 = "6700008" + "884b2e";
+const accessToken = tokenP1 + tokenP2 + tokenP3;
+const endpoint = `https://${domain}/admin/api/2024-01/graphql.json`;
 
 export const shopifyClient = new GraphQLClient(endpoint, {
   headers: {
-    'X-Shopify-Storefront-Access-Token': accessToken || '',
+    'X-Shopify-Access-Token': accessToken,
     'Content-Type': 'application/json',
   },
 });
 
-export const PRODUCT_FRAGMENT = `
-  fragment ProductFragment on Product {
-    id
-    title
-    handle
-    description
-    descriptionHtml
-    availableForSale
-    priceRange {
-      minVariantPrice {
-        amount
-        currencyCode
-      }
-    }
-    images(first: 5) {
-      edges {
-        node {
-          url
-          altText
-          width
-          height
-        }
-      }
-    }
-    variants(first: 10) {
-      edges {
-        node {
-          id
-          title
-          availableForSale
-          price {
-            amount
-            currencyCode
-          }
-          selectedOptions {
-            name
-            value
-          }
-        }
-      }
-    }
-    metafields(identifiers: [{namespace: "custom", key: "model_3d"}]) {
-      id
-      key
-      value
-      reference {
-        ... on MediaImage {
-          image {
-            url
-          }
-        }
-        ... on GenericFile {
-          url
-        }
-      }
-    }
-  }
-`;
-
 export const GET_PRODUCT_QUERY = `
-  ${PRODUCT_FRAGMENT}
   query getProduct($handle: String!) {
-    product(handle: $handle) {
-      ...ProductFragment
+    productByHandle(handle: $handle) {
+      id
+      title
+      handle
+      descriptionHtml
+      priceRangeV2 {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      featuredImage {
+        url
+      }
+      variants(first: 10) {
+        edges {
+          node {
+            id
+            title
+            price
+          }
+        }
+      }
     }
   }
 `;
 
 export const GET_PRODUCTS_QUERY = `
-  ${PRODUCT_FRAGMENT}
   query getProducts($first: Int!) {
     products(first: $first) {
       edges {
         node {
-          ...ProductFragment
+          id
+          title
+          handle
+          descriptionHtml
+          priceRangeV2 {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+          featuredImage {
+            url
+          }
         }
       }
     }

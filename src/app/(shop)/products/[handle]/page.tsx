@@ -12,7 +12,7 @@ export default async function ProductDetailPage({
   
   const result: any = await shopifyClient.request(GET_PRODUCT_QUERY, { handle });
 
-  const productData = result?.product;
+  const productData = result?.productByHandle;
 
   if (!productData) {
     return (
@@ -28,9 +28,9 @@ export default async function ProductDetailPage({
     title: productData.title,
     handle: productData.handle,
     descriptionHtml: productData.descriptionHtml,
-    price: productData.priceRange.minVariantPrice.amount,
-    currencyCode: productData.priceRange.minVariantPrice.currencyCode,
-    image: productData.images.edges[0]?.node?.url || '',
+    price: productData.priceRangeV2.minVariantPrice.amount,
+    currencyCode: productData.priceRangeV2.minVariantPrice.currencyCode,
+    image: productData.featuredImage?.url || '',
     modelUrl: productData.metafield?.value || null,
     variants: productData.variants.edges.map((e: any) => e.node),
   };

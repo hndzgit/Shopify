@@ -68,18 +68,30 @@ export default function CartDrawer() {
                 </span>
               </div>
               <button
-                disabled={items.length === 0 || !checkoutUrl}
+                disabled={items.length === 0}
                 onClick={() => {
-                  if (checkoutUrl) window.location.href = checkoutUrl;
+                  const itemsPath = items.map(item => {
+                    const id = item.variantId.split('/').pop();
+                    return `${id}:${item.quantity}`;
+                  }).join(',');
+                  const shopDomain = "d8157a-13.myshopify.com";
+                  const permalink = `https://${shopDomain}/cart/${itemsPath}?checkout`;
+                  window.location.href = permalink;
                 }}
                 className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold uppercase tracking-wide text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-500 hover:scale-[1.02] shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all"
               >
                 Checkout
               </button>
               <button
-                disabled={items.length === 0 || !checkoutUrl}
+                disabled={items.length === 0}
                 onClick={() => {
-                  if (checkoutUrl) window.location.href = checkoutUrl;
+                  const itemsPath = items.map(item => {
+                    const id = item.variantId.split('/').pop();
+                    return `${id}:${item.quantity}`;
+                  }).join(',');
+                  const shopDomain = "d8157a-13.myshopify.com";
+                  const permalink = `https://${shopDomain}/cart/${itemsPath}?checkout`;
+                  window.location.href = permalink;
                 }}
                 className="w-full bg-[#ffc439] text-black py-4 rounded-xl font-bold flex justify-center items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#f4bb33] hover:scale-[1.02] shadow-[0_0_20px_rgba(255,196,57,0.1)] transition-all"
               >
