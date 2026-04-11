@@ -34,12 +34,20 @@ export const GET_PRODUCT_QUERY = `
           }
         }
       }
-      variants(first: 10) {
+      options {
+        name
+        values
+      }
+      variants(first: 250) {
         edges {
           node {
             id
             title
             price
+            selectedOptions {
+              name
+              value
+            }
           }
         }
       }
