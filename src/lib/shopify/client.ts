@@ -1,6 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
 
-const domain = process.env.SHOPIFY_STORE_DOMAIN;
+const rawDomain = process.env.SHOPIFY_STORE_DOMAIN || '';
+const domain = rawDomain.replace(/^https?:\/\//, '').replace(/\/$/, '');
 const accessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 const apiVersion = process.env.PUBLIC_STOREFRONT_API_VERSION || '2025-01';
 
