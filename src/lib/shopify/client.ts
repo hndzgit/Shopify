@@ -58,7 +58,7 @@ export const GET_PRODUCT_QUERY = `
 
 export const GET_PRODUCTS_QUERY = `
   query getProducts($first: Int!) {
-    products(first: $first) {
+    products(first: $first, query: "status:active") {
       edges {
         node {
           id
