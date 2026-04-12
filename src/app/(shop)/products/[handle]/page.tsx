@@ -1,6 +1,7 @@
 import { shopifyClient, GET_PRODUCT_QUERY } from "@/src/lib/shopify/client";
 import ProductGallery from '@/src/components/product/ProductGallery';
 import ProductInteractive from '@/src/components/product/ProductInteractive';
+import { Plane, ShieldCheck, Package } from 'lucide-react';
 
 export default async function ProductDetailPage({
   params,
@@ -37,14 +38,14 @@ export default async function ProductDetailPage({
   const mainImage = product.images[0] || '';
 
   return (
-    <div className="max-w-7xl mx-auto px-0 md:px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 relative z-10 bg-white">
+    <div className="max-w-7xl mx-auto px-0 md:px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 relative z-10 bg-white opacity-0 animate-fade-up">
       <div className="lg:col-span-12 h-auto w-full relative z-10">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           {/* STACKED IMAGE GALLERY COLUMN (LEFT) - Move to bottom on mobile */}
           <div className="w-full lg:col-span-7 flex flex-col gap-4 order-2 lg:order-1">
             {product.images.map((imgUrl: string, idx: number) => (
-              <div key={idx} className={`w-full bg-neutral-100 md:rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto ${idx === 0 ? 'hidden lg:block' : ''}`}>
-                <img src={imgUrl} alt={`${product.title} image ${idx + 1}`} className="w-full h-full object-cover mix-blend-multiply" />
+              <div key={idx} className={`w-full bg-neutral-50 md:rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto border border-neutral-100 ${idx === 0 ? 'hidden lg:block' : ''}`}>
+                <img src={imgUrl} alt={`${product.title} image ${idx + 1}`} className="w-full h-full object-cover mix-blend-multiply transition-transform hover:scale-105 duration-700" />
               </div>
             ))}
           </div>
@@ -53,33 +54,33 @@ export default async function ProductDetailPage({
           <div className="flex flex-col gap-8 lg:col-span-5 sticky top-24 bg-white p-6 md:p-0 md:pt-4 order-1 lg:order-2">
             
             {/* MOBILE ONLY: MAIN IMAGE */}
-            <div className="w-full lg:hidden bg-neutral-100 overflow-hidden mb-2 aspect-[4/5] border-b border-neutral-100">
-               <img src={mainImage} alt={`${product.title} main`} className="w-full h-full object-cover mix-blend-multiply" />
+            <div className="w-full lg:hidden bg-neutral-50 overflow-hidden mb-2 aspect-[4/5] border-b border-neutral-100 relative group">
+               <img src={mainImage} alt={`${product.title} main`} className="w-full h-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-105" />
             </div>
 
-            <div>
-              <div className="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-green-200">In Stock & Ready to Ship</div>
-              <h1 className="text-3xl md:text-4xl font-black tracking-tight text-black leading-tight">
+            <div className="space-y-4">
+              <div className="inline-block px-4 py-1.5 bg-neutral-900 text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-sm">In Stock & Ready to Ship</div>
+              <h1 className="text-4xl md:text-5xl font-black tracking-tight text-neutral-900 leading-[1.1]">
                 {product.title}
               </h1>
             </div>
             
-            <div className="py-6 border-y border-neutral-200">
+            <div className="py-6 border-y border-neutral-100">
                <ProductInteractive product={product} mainImage={mainImage} />
             </div>
 
-            {/* TRUST BADGES */}
-            <div className="grid grid-cols-3 gap-2 text-center text-xs text-neutral-600 font-medium">
-              <div className="flex flex-col items-center gap-2 p-3 bg-neutral-50 rounded-xl border border-neutral-200">
-                <span className="text-2xl">✈️</span>
+            {/* LUXURY TRUST BADGES */}
+            <div className="grid grid-cols-3 gap-3 text-center text-[10px] uppercase tracking-widest text-neutral-500 font-bold">
+              <div className="flex flex-col items-center justify-center gap-3 p-4 bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-neutral-100 transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1">
+                <Plane className="w-6 h-6 text-neutral-900 stroke-[1.5]" />
                 <span>Free Global<br/>Shipping</span>
               </div>
-              <div className="flex flex-col items-center gap-2 p-3 bg-neutral-50 rounded-xl border border-neutral-200">
-                <span className="text-2xl">🛡️</span>
+              <div className="flex flex-col items-center justify-center gap-3 p-4 bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-neutral-100 transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1">
+                <ShieldCheck className="w-6 h-6 text-neutral-900 stroke-[1.5]" />
                 <span>Secure<br/>Checkout</span>
               </div>
-              <div className="flex flex-col items-center gap-2 p-3 bg-neutral-50 rounded-xl border border-neutral-200">
-                <span className="text-2xl">📦</span>
+              <div className="flex flex-col items-center justify-center gap-3 p-4 bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-neutral-100 transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1">
+                <Package className="w-6 h-6 text-neutral-900 stroke-[1.5]" />
                 <span>30-Day<br/>Returns</span>
               </div>
             </div>
