@@ -27,14 +27,14 @@ export default function ProductGallery({ images, title }: { images: string[]; ti
 
       {/* Thumbnails */}
       {images.length > 1 && (
-        <div className="grid grid-cols-5 gap-3">
+        <div className="grid grid-cols-5 gap-3 max-h-[350px] overflow-y-auto pr-2 custom-scrollbar">
           {images.map((imgUrl, idx) => (
             <div 
               key={idx} 
               onMouseEnter={() => setActiveIndex(idx)}
               onClick={() => setActiveIndex(idx)}
               className={`aspect-square bg-white rounded-xl border ${
-                idx === activeIndex ? 'border-blue-500 ring-2 ring-blue-500/50' : 'border-white/10'
+                idx === activeIndex ? 'border-primary ring-2 ring-primary/50' : 'border-white/10'
               } overflow-hidden cursor-pointer opacity-80 hover:opacity-100 transition-all`}
             >
               <img 

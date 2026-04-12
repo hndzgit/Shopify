@@ -8,6 +8,23 @@
   --color-luxury-gold: #d4af37;
   --color-luxury-black: #0a0a0a;
   --color-luxury-white: #fafafa;
+
+  --animate-blob: blob 15s infinite alternate ease-in-out;
+  --animate-blob-reverse: blob-reverse 20s infinite alternate ease-in-out;
+  
+  @keyframes blob {
+    0% { transform: translate(0vw, 0vh) scale(1); }
+    33% { transform: translate(10vw, -10vh) scale(1.1); }
+    66% { transform: translate(-5vw, 5vh) scale(0.9); }
+    100% { transform: translate(0vw, 0vh) scale(1); }
+  }
+
+  @keyframes blob-reverse {
+    0% { transform: translate(0vw, 0vh) scale(1); }
+    33% { transform: translate(-10vw, 15vh) scale(1.2); }
+    66% { transform: translate(10vw, -5vh) scale(0.8); }
+    100% { transform: translate(0vw, 0vh) scale(1); }
+  }
 }
 
 @layer base {
@@ -17,5 +34,20 @@
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/20;
   }
 }

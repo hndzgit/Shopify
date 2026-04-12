@@ -79,9 +79,14 @@ function Footer() {
 export default function ShopLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-[#050505] text-white transition-colors flex flex-col relative overflow-hidden">
-      {/* Animated Background Glow */}
-      <div className="fixed top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-900/20 blur-[150px] rounded-full pointer-events-none z-0 mix-blend-screen" />
-      <div className="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-blue-900/20 blur-[150px] rounded-full pointer-events-none z-0 mix-blend-screen" />
+      {/* Animated Luxury Background Glow */}
+      <div className="fixed top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-900/10 blur-[150px] rounded-full pointer-events-none z-0 mix-blend-screen animate-blob" />
+      <div className="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-blue-900/10 blur-[150px] rounded-full pointer-events-none z-0 mix-blend-screen animate-blob-reverse" />
+      <div className="fixed top-[40%] left-[60%] w-[30vw] h-[30vw] bg-purple-900/10 blur-[120px] rounded-full pointer-events-none z-0 mix-blend-screen animate-blob" style={{ animationDelay: '2s' }} />
+      <div className="fixed top-[20%] left-[30%] w-[20vw] h-[20vw] bg-amber-900/10 blur-[100px] rounded-full pointer-events-none z-0 mix-blend-screen animate-blob-reverse" style={{ animationDelay: '4s' }} />
+      
+      {/* Subtle Noise Texture */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-20 mix-blend-overlay" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
 
       <Header />
       <CartDrawer />
