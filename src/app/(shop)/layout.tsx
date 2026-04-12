@@ -6,6 +6,7 @@ import { ShoppingBag } from "lucide-react";
 import { useCartStore } from "@/src/store/useCartStore";
 import CartDrawer from "@/src/components/ui/CartDrawer";
 import MobileMenu from "@/src/components/ui/MobileMenu";
+import LiveSalesPopup from "@/src/components/ui/LiveSalesPopup";
 
 function Header() {
   const { setCartOpen, items } = useCartStore();
@@ -83,6 +84,7 @@ export default function ShopLayout({ children }: { children: ReactNode }) {
 
       <Header />
       <CartDrawer />
+      <LiveSalesPopup />
       <main className="flex-1 relative z-10">{children}</main>
       <Footer />
     </div>
