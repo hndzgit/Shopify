@@ -81,9 +81,9 @@ export default async function ProductDetailPage({
                   <span>Full Device Specifications</span>
                   <span className="transition group-open:rotate-180">↓</span>
                 </summary>
-                <div className="p-5 pt-0 text-neutral-400 bg-white/5">
+                <div className="p-5 pt-0 text-neutral-400 bg-transparent">
                   <div 
-                    className="prose prose-invert prose-sm leading-relaxed max-w-none overflow-hidden [&_img]:max-w-full [&_table]:w-full [&_p]:m-0 [&_img]:m-0 [&_img]:block [&_img]:mx-auto [&_br]:hidden [&_img]:rounded-xl [&_img]:my-4" 
+                    className="prose prose-invert prose-sm leading-relaxed max-w-none overflow-hidden [&_img]:max-w-full [&_table]:w-full [&_p]:m-0 [&_img]:m-0 [&_img]:block [&_img]:mx-auto [&_br]:hidden [&_img]:rounded-xl [&_img]:my-4 [&_*]:!text-neutral-300 [&_*]:!bg-transparent [&_*]:!font-sans" 
                     dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} 
                   />
                 </div>
