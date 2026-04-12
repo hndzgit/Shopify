@@ -39,18 +39,24 @@ export default async function ProductDetailPage({
   return (
     <div className="max-w-7xl mx-auto px-0 md:px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 relative z-10 bg-white">
       <div className="lg:col-span-12 h-auto w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-          {/* STACKED IMAGE GALLERY COLUMN (LEFT) */}
-          <div className="w-full lg:col-span-7 flex flex-col gap-4">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+          {/* STACKED IMAGE GALLERY COLUMN (LEFT) - Move to bottom on mobile */}
+          <div className="w-full lg:col-span-7 flex flex-col gap-4 order-2 lg:order-1">
             {product.images.map((imgUrl: string, idx: number) => (
-              <div key={idx} className="w-full bg-neutral-100 md:rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto">
-                <img src={imgUrl} alt={`${product.title} image ${idx + 1}`} className="w-full h-full object-cover" />
+              <div key={idx} className={`w-full bg-neutral-100 md:rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto ${idx === 0 ? 'hidden lg:block' : ''}`}>
+                <img src={imgUrl} alt={`${product.title} image ${idx + 1}`} className="w-full h-full object-cover mix-blend-multiply" />
               </div>
             ))}
           </div>
 
-          {/* PRODUCT INFO & INTERACTIVE COLUMN (STICKY RIGHT) */}
-          <div className="flex flex-col gap-8 lg:col-span-5 sticky top-24 bg-white p-6 md:p-0 md:pt-4">
+          {/* PRODUCT INFO & INTERACTIVE COLUMN (STICKY RIGHT) - Move to top on mobile */}
+          <div className="flex flex-col gap-8 lg:col-span-5 sticky top-24 bg-white p-6 md:p-0 md:pt-4 order-1 lg:order-2">
+            
+            {/* MOBILE ONLY: MAIN IMAGE */}
+            <div className="w-full lg:hidden bg-neutral-100 overflow-hidden mb-2 aspect-[4/5] border-b border-neutral-100">
+               <img src={mainImage} alt={`${product.title} main`} className="w-full h-full object-cover mix-blend-multiply" />
+            </div>
+
             <div>
               <div className="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-green-200">In Stock & Ready to Ship</div>
               <h1 className="text-3xl md:text-4xl font-black tracking-tight text-black leading-tight">
@@ -78,20 +84,15 @@ export default async function ProductDetailPage({
               </div>
             </div>
 
-            {/* LONG DESCRIPTION ACCORDION */}
-            <div className="mt-2">
-              <details className="group bg-white rounded-2xl border border-neutral-200 overflow-hidden">
-                <summary className="flex items-center justify-between p-5 font-bold cursor-pointer list-none text-black hover:bg-neutral-50 transition-colors">
-                  <span>Full Device Specifications</span>
-                  <span className="transition group-open:rotate-180 text-xl font-light">↓</span>
-                </summary>
-                <div className="p-5 pt-0 text-neutral-700 bg-transparent">
-                  <div 
-                    className="prose prose-sm leading-relaxed max-w-none overflow-hidden [&_img]:max-w-full [&_table]:w-full [&_p]:m-0 [&_img]:m-0 [&_img]:block [&_img]:mx-auto [&_br]:hidden [&_img]:rounded-xl [&_img]:my-4 [&_*]:!text-neutral-700 [&_*]:!bg-transparent [&_*]:!font-sans" 
-                    dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} 
-                  />
-                </div>
-              </details>
+            {/* EXPANDED FULL DEVICE SPECIFICATIONS */}
+            <div className="mt-8 border-t border-neutral-200 pt-8">
+              <h3 className="text-xl font-bold text-black mb-6 uppercase tracking-wider">Product Features</h3>
+              <div className="text-neutral-700 bg-transparent">
+                <div 
+                  className="prose prose-sm leading-relaxed max-w-none overflow-hidden [&_img]:max-w-full [&_table]:w-full [&_p]:m-0 [&_img]:m-0 [&_img]:block [&_img]:mx-auto [&_br]:hidden [&_img]:rounded-xl [&_img]:my-4 [&_*]:!text-neutral-700 [&_*]:!bg-transparent [&_*]:!font-sans" 
+                  dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} 
+                />
+              </div>
             </div>
           </div>
         </div>
