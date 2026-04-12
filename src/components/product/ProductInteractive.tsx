@@ -70,29 +70,28 @@ export default function ProductInteractive({ product, mainImage }: { product: an
   return (
     <div className="flex flex-col gap-6">
       {/* Price */}
-      <p className="text-4xl font-bold text-white">
+      <p className="text-4xl font-bold text-black">
         {product.currencyCode} ${currentPrice}
       </p>
 
       {/* Options Rendering (e.g., Color, Size) */}
       {product.options && product.options.map((opt: any, idx: number) => {
-        // Skip Default Title as it's an internal Shopify mechanism when no variants exist
         if (opt.name === 'Title' && opt.values.includes('Default Title')) return null;
 
         return (
           <div key={idx} className="flex flex-col gap-3">
-            <span className="text-sm font-bold tracking-widest text-neutral-400 uppercase">
-              {opt.name}: <span className="text-white">{selectedOptions[opt.name]}</span>
+            <span className="text-sm font-bold tracking-wider text-black">
+              {opt.name}: <span className="font-normal text-neutral-500">{selectedOptions[opt.name]}</span>
             </span>
             <div className="flex flex-wrap gap-2">
               {opt.values.map((val: string, valIdx: number) => (
                 <button
                   key={valIdx}
                   onClick={() => handleOptionSelect(opt.name, val)}
-                  className={`px-4 py-2 border rounded-full text-sm font-medium transition-all ${
+                  className={`px-5 py-3 border rounded-xl text-sm font-medium transition-all ${
                     selectedOptions[opt.name] === val 
-                      ? 'border-blue-500 bg-blue-500/10 text-blue-400' 
-                      : 'border-white/10 hover:border-white/30 text-white'
+                      ? 'border-black bg-black text-white shadow-md' 
+                      : 'border-neutral-200 hover:border-neutral-400 text-black bg-white'
                   }`}
                 >
                   {val}
@@ -105,37 +104,51 @@ export default function ProductInteractive({ product, mainImage }: { product: an
 
       {/* Quantity Selector */}
       <div className="flex flex-col gap-3">
-        <span className="text-sm font-bold tracking-widest text-neutral-400 uppercase">Quantity</span>
-        <div className="flex items-center gap-4 bg-white/5 w-fit rounded-full p-1 border border-white/10">
+        <span className="text-sm font-bold tracking-wider text-black">QUANTITY</span>
+        <div className="flex items-center gap-4 bg-white w-fit rounded-xl p-1 border border-neutral-200">
           <button 
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
+            className="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-neutral-100 text-black font-bold text-lg transition-colors"
           >
             -
           </button>
-          <span className="w-8 text-center font-bold">{quantity}</span>
+          <span className="w-8 text-center font-bold text-black">{quantity}</span>
           <button 
             onClick={() => setQuantity(quantity + 1)}
-            className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
+            className="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-neutral-100 text-black font-bold text-lg transition-colors"
           >
             +
           </button>
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
+      {/* Action Buttons (Desktop defaults + Mobile inline) */}
+      <div className="flex flex-col gap-3 pt-4">
         <button 
           onClick={() => handleAddToCart(false)}
-          className="w-full py-4 bg-[#FF4747]/10 text-[#FF4747] font-bold uppercase tracking-widest text-sm rounded-full hover:bg-[#FF4747]/20 border border-[#FF4747]/30 transition-all"
+          className="w-full py-4 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-full hover:bg-neutral-50 border-2 border-black transition-all"
         >
           Add to Cart
         </button>
         <button 
           onClick={() => handleAddToCart(true)}
-          className="w-full py-4 bg-gradient-to-r from-[#FF4747] to-[#FF0000] text-white font-bold uppercase tracking-widest text-sm rounded-full hover:scale-[1.02] transition-all shadow-[0_0_20px_rgba(255,71,71,0.3)]"
+          className="w-full py-4 bg-[#FF4747] text-white font-bold uppercase tracking-widest text-sm rounded-full hover:bg-[#E03A3A] transition-all hover:scale-[1.01] shadow-[0_4px_14px_0_rgba(255,71,71,0.39)]"
         >
           Buy it Now
+        </button>
+      </div>
+
+      {/* MOBILE STICKY BOTTOM BAR */}
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-neutral-100 z-50 md:hidden flex items-center justify-between shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
+        <div className="flex flex-col">
+          <span className="text-xs text-neutral-500 line-clamp-1">{product.title}</span>
+          <span className="font-bold text-lg text-black">${currentPrice}</span>
+        </div>
+        <button 
+          onClick={() => handleAddToCart(true)}
+          className="px-8 py-3 bg-[#FF4747] text-white font-bold uppercase tracking-wider text-sm rounded-full shadow-lg active:scale-95 transition-transform"
+        >
+          Buy Now
         </button>
       </div>
 

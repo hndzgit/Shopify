@@ -12,7 +12,7 @@ export default function MobileMenu() {
     <div className="md:hidden flex items-center pr-2">
       <button 
         onClick={() => setIsOpen(true)}
-        className="p-2 hover:bg-white/10 text-white rounded-full transition-colors"
+        className="p-2 hover:bg-neutral-100 text-black rounded-full transition-colors"
       >
         <Menu size={24} />
       </button>
@@ -23,19 +23,19 @@ export default function MobileMenu() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-50 bg-[#050505] flex flex-col px-6 py-8 h-[100dvh]"
+            className="fixed inset-0 z-50 bg-white flex flex-col px-6 py-8 h-[100dvh]"
           >
             <div className="flex justify-between items-center mb-16">
-              <Link href="/" onClick={() => setIsOpen(false)} className="text-2xl font-black tracking-tighter text-white">LUMINA TECH</Link>
-              <button onClick={() => setIsOpen(false)} className="p-2 bg-white/5 rounded-full text-white">
+              <Link href="/" onClick={() => setIsOpen(false)} className="text-2xl font-black tracking-tighter text-black">LUMINA TECH</Link>
+              <button onClick={() => setIsOpen(false)} className="p-2 bg-neutral-100 rounded-full text-black">
                 <X size={24} />
               </button>
             </div>
 
             <nav className="flex flex-col gap-8 text-2xl font-black tracking-tighter uppercase">
-              <Link href="/collections/all" onClick={() => setIsOpen(false)} className="text-blue-400 hover:text-white transition-colors">Devices</Link>
-              <Link href="/about" onClick={() => setIsOpen(false)} className="text-blue-400 hover:text-white transition-colors">Vision</Link>
-              <Link href="/contact" onClick={() => setIsOpen(false)} className="text-blue-400 hover:text-white transition-colors">Contact</Link>
+              <Link href="/collections/all" onClick={() => setIsOpen(false)} className="text-neutral-700 hover:text-black transition-colors">Devices</Link>
+              <Link href="/about" onClick={() => setIsOpen(false)} className="text-neutral-700 hover:text-black transition-colors">Vision</Link>
+              <Link href="/contact" onClick={() => setIsOpen(false)} className="text-neutral-700 hover:text-black transition-colors">Contact</Link>
             </nav>
 
             <div className="mt-auto pb-4 text-neutral-500 text-sm">

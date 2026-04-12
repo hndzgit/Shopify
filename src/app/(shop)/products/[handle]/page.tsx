@@ -37,53 +37,57 @@ export default async function ProductDetailPage({
   const mainImage = product.images[0] || '';
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
+    <div className="max-w-7xl mx-auto px-0 md:px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 relative z-10 bg-white">
       <div className="lg:col-span-12 h-auto w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* IMAGE GALLERY COLUMN */}
-          <div className="w-full lg:col-span-7 bg-[#0a0a0a] border border-white/5 p-6 md:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            <ProductGallery images={product.images} title={product.title} />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+          {/* STACKED IMAGE GALLERY COLUMN (LEFT) */}
+          <div className="w-full lg:col-span-7 flex flex-col gap-4">
+            {product.images.map((imgUrl: string, idx: number) => (
+              <div key={idx} className="w-full bg-neutral-100 md:rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto">
+                <img src={imgUrl} alt={`${product.title} image ${idx + 1}`} className="w-full h-full object-cover" />
+              </div>
+            ))}
           </div>
 
-          {/* PRODUCT INFO & INTERACTIVE COLUMN (STICKY) */}
-          <div className="flex flex-col gap-8 lg:col-span-5 sticky top-32 bg-[#0a0a0a] border border-white/5 p-6 md:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+          {/* PRODUCT INFO & INTERACTIVE COLUMN (STICKY RIGHT) */}
+          <div className="flex flex-col gap-8 lg:col-span-5 sticky top-24 bg-white p-6 md:p-0 md:pt-4">
             <div>
-              <div className="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-emerald-500/20">In Stock & Ready to Ship</div>
-              <h1 className="text-3xl md:text-5xl font-black tracking-tighter text-white leading-tight">
+              <div className="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-green-200">In Stock & Ready to Ship</div>
+              <h1 className="text-3xl md:text-4xl font-black tracking-tight text-black leading-tight">
                 {product.title}
               </h1>
             </div>
             
-            <div className="py-6 border-y border-white/10">
+            <div className="py-6 border-y border-neutral-200">
                <ProductInteractive product={product} mainImage={mainImage} />
             </div>
 
             {/* TRUST BADGES */}
-            <div className="grid grid-cols-3 gap-2 text-center text-xs text-neutral-400">
-              <div className="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl border border-white/5">
-                <span className="text-xl">✈️</span>
+            <div className="grid grid-cols-3 gap-2 text-center text-xs text-neutral-600 font-medium">
+              <div className="flex flex-col items-center gap-2 p-3 bg-neutral-50 rounded-xl border border-neutral-200">
+                <span className="text-2xl">✈️</span>
                 <span>Free Global<br/>Shipping</span>
               </div>
-              <div className="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl border border-white/5">
-                <span className="text-xl">🛡️</span>
+              <div className="flex flex-col items-center gap-2 p-3 bg-neutral-50 rounded-xl border border-neutral-200">
+                <span className="text-2xl">🛡️</span>
                 <span>Secure<br/>Checkout</span>
               </div>
-              <div className="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl border border-white/5">
-                <span className="text-xl">📦</span>
+              <div className="flex flex-col items-center gap-2 p-3 bg-neutral-50 rounded-xl border border-neutral-200">
+                <span className="text-2xl">📦</span>
                 <span>30-Day<br/>Returns</span>
               </div>
             </div>
 
             {/* LONG DESCRIPTION ACCORDION */}
             <div className="mt-2">
-              <details className="group bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
-                <summary className="flex items-center justify-between p-5 font-bold cursor-pointer list-none text-white hover:bg-white/5 transition-colors">
+              <details className="group bg-white rounded-2xl border border-neutral-200 overflow-hidden">
+                <summary className="flex items-center justify-between p-5 font-bold cursor-pointer list-none text-black hover:bg-neutral-50 transition-colors">
                   <span>Full Device Specifications</span>
-                  <span className="transition group-open:rotate-180">↓</span>
+                  <span className="transition group-open:rotate-180 text-xl font-light">↓</span>
                 </summary>
-                <div className="p-5 pt-0 text-neutral-400 bg-transparent">
+                <div className="p-5 pt-0 text-neutral-700 bg-transparent">
                   <div 
-                    className="prose prose-invert prose-sm leading-relaxed max-w-none overflow-hidden [&_img]:max-w-full [&_table]:w-full [&_p]:m-0 [&_img]:m-0 [&_img]:block [&_img]:mx-auto [&_br]:hidden [&_img]:rounded-xl [&_img]:my-4 [&_*]:!text-neutral-300 [&_*]:!bg-transparent [&_*]:!font-sans" 
+                    className="prose prose-sm leading-relaxed max-w-none overflow-hidden [&_img]:max-w-full [&_table]:w-full [&_p]:m-0 [&_img]:m-0 [&_img]:block [&_img]:mx-auto [&_br]:hidden [&_img]:rounded-xl [&_img]:my-4 [&_*]:!text-neutral-700 [&_*]:!bg-transparent [&_*]:!font-sans" 
                     dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} 
                   />
                 </div>
