@@ -38,7 +38,7 @@ export default async function ProductDetailPage({
   const mainImage = product.images[0] || '';
 
   return (
-    <div className="max-w-7xl mx-auto px-0 md:px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 relative z-10 bg-white opacity-0 animate-fade-up">
+    <div className="max-w-7xl mx-auto px-0 md:px-6 py-32 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 relative z-10 bg-white opacity-0 animate-fade-up">
       <div className="lg:col-span-12 h-auto w-full relative z-10">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           {/* STACKED IMAGE GALLERY COLUMN (LEFT) - Move to bottom on mobile */}
@@ -51,7 +51,7 @@ export default async function ProductDetailPage({
           </div>
 
           {/* PRODUCT INFO & INTERACTIVE COLUMN (STICKY RIGHT) - Move to top on mobile */}
-          <div className="flex flex-col gap-8 lg:col-span-5 sticky top-24 bg-white p-6 md:p-0 md:pt-4 order-1 lg:order-2">
+          <div className="flex flex-col gap-8 lg:col-span-5 sticky top-32 bg-white p-6 md:p-0 md:pt-4 order-1 lg:order-2">
             
             {/* MOBILE ONLY: MAIN IMAGE */}
             <div className="w-full lg:hidden bg-neutral-50 overflow-hidden mb-2 aspect-[4/5] border-b border-neutral-100 relative group">
@@ -59,7 +59,13 @@ export default async function ProductDetailPage({
             </div>
 
             <div className="space-y-4">
-              <div className="inline-block px-4 py-1.5 bg-neutral-900 text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-sm">In Stock & Ready to Ship</div>
+              <div className="flex items-center justify-between">
+                <div className="inline-block px-4 py-1.5 bg-neutral-900 text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-sm">In Stock & Ready to Ship</div>
+                <div className="flex items-center gap-1 text-[#FFB800]">
+                  <span className="text-sm">★★★★★</span>
+                  <span className="text-xs font-bold text-neutral-600 ml-1">4.9/5 (1,024)</span>
+                </div>
+              </div>
               <h1 className="text-4xl md:text-5xl font-black tracking-tight text-neutral-900 leading-[1.1]">
                 {product.title}
               </h1>

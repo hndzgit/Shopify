@@ -69,12 +69,20 @@ export default function ProductInteractive({ product, mainImage }: { product: an
 
   return (
     <div className="flex flex-col gap-6">
+      
+      {/* FOMO: LIVE SALES COUNTER */}
+      <div className="flex items-center gap-2 p-3 bg-red-50 text-red-700 font-medium text-sm rounded-xl border border-red-100">
+        <span className="animate-pulse text-lg">🔥</span>
+        <span><strong>24 items sold</strong> in the last 24 hours</span>
+      </div>
+
       {/* Price */}
       <div className="flex items-baseline gap-2">
         <p className="text-4xl font-black text-neutral-900 tracking-tight">
           ${currentPrice}
         </p>
         <span className="text-sm font-medium text-neutral-400">{product.currencyCode}</span>
+        <span className="ml-2 text-sm font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md">Save 20%</span>
       </div>
 
       {/* Options Rendering (e.g., Color, Size) */}
@@ -125,6 +133,20 @@ export default function ProductInteractive({ product, mainImage }: { product: an
         </div>
       </div>
 
+      {/* FOMO: STOCK PROGRESS BAR */}
+      <div className="flex flex-col gap-2 mt-2">
+        <div className="flex items-center gap-2 text-[#FF4747] font-bold text-[13px]">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4747] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF4747]"></span>
+          </span>
+          Hurry! Only 14 units left in stock!
+        </div>
+        <div className="w-full h-2 bg-neutral-100 rounded-full overflow-hidden">
+          <div className="h-full bg-[#FF4747] w-[15%] rounded-full"></div>
+        </div>
+      </div>
+
       {/* Action Buttons (Desktop defaults + Mobile inline) */}
       <div className="flex flex-col gap-3 pt-6 border-t border-neutral-100 mt-2">
         <button 
@@ -140,6 +162,17 @@ export default function ProductInteractive({ product, mainImage }: { product: an
           <div className="absolute inset-0 bg-[linear-gradient(110deg,transparent,45%,rgba(255,255,255,0.2),55%,transparent)] bg-[length:200%_100%] animate-shimmer" />
           <span className="relative z-10">Buy it Now</span>
         </button>
+      </div>
+
+      {/* TRUST: PAYMENT LOGOS */}
+      <div className="flex flex-col items-center gap-3 pt-4">
+        <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold">Guaranteed Safe Checkout</span>
+        <div className="flex items-center justify-center gap-4 opacity-60">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-4" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-3" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MasterCard" className="h-5" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Pay" className="h-4" />
+        </div>
       </div>
 
       {/* MOBILE STICKY BOTTOM BAR (GLASSMORPHISM) */}

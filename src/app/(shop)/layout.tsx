@@ -13,29 +13,37 @@ function Header() {
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-b border-neutral-200">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative">
-        <div className="flex items-center">
-          <MobileMenu />
-          <Link href="/" className="text-2xl font-black tracking-tighter text-black">LUMINA</Link>
-        </div>
-        <nav className="hidden md:flex gap-8 text-sm font-medium absolute left-1/2 -translate-x-1/2">
-          <Link href="/collections/all" className="text-neutral-600 hover:text-black transition-colors">Devices</Link>
-          <Link href="/about" className="text-neutral-600 hover:text-black transition-colors">Vision</Link>
-          <Link href="/contact" className="text-neutral-600 hover:text-black transition-colors">Contact</Link>
-        </nav>
-        <div className="flex items-center gap-4">
-          <button 
-            onClick={() => setCartOpen(true)}
-            className="p-2 hover:bg-neutral-100 text-black rounded-full transition-colors relative"
-          >
-            <ShoppingBag size={20} />
-            {totalItems > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] flex items-center justify-center rounded-full font-bold">
-                {totalItems}
-              </span>
-            )}
-          </button>
+    <header className="fixed top-0 left-0 right-0 z-40 flex flex-col">
+      {/* ANNOUNCEMENT BAR */}
+      <div className="bg-[#FF4747] text-white h-8 flex items-center justify-center text-[10px] sm:text-xs font-bold uppercase tracking-widest px-4 text-center">
+        🔥 FREE GLOBAL SHIPPING ON ALL ORDERS ENDS TONIGHT!
+      </div>
+      
+      {/* MAIN NAVIGATION */}
+      <div className="bg-white/80 backdrop-blur-xl border-b border-neutral-200">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative">
+          <div className="flex items-center">
+            <MobileMenu />
+            <Link href="/" className="text-2xl font-black tracking-tighter text-black">LUMINA</Link>
+          </div>
+          <nav className="hidden md:flex gap-8 text-sm font-medium absolute left-1/2 -translate-x-1/2">
+            <Link href="/collections/all" className="text-neutral-600 hover:text-black transition-colors">Devices</Link>
+            <Link href="/about" className="text-neutral-600 hover:text-black transition-colors">Vision</Link>
+            <Link href="/contact" className="text-neutral-600 hover:text-black transition-colors">Contact</Link>
+          </nav>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setCartOpen(true)}
+              className="p-2 hover:bg-neutral-100 text-black rounded-full transition-colors relative"
+            >
+              <ShoppingBag size={20} />
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 bg-[#FF4747] text-white text-[10px] flex items-center justify-center rounded-full font-bold shadow-sm">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </header>
